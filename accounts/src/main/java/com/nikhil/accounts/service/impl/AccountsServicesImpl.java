@@ -5,6 +5,7 @@ import com.nikhil.accounts.constants.AccountsConstants;
 import com.nikhil.accounts.dto.CustomerDto;
 import com.nikhil.accounts.entity.Accounts;
 import com.nikhil.accounts.entity.Customer;
+import com.nikhil.accounts.exception.CustomerAlreadyExistsException;
 import com.nikhil.accounts.mapper.CustomerMapper;
 import com.nikhil.accounts.repository.AccountsRepositiry;
 import com.nikhil.accounts.repository.CustomerRepositiry;
@@ -12,6 +13,7 @@ import com.nikhil.accounts.service.IAccountsService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -30,7 +32,12 @@ public class AccountsServicesImpl implements IAccountsService {
      */
     @Override
     public void createAccount(CustomerDto customerDto) {
-        Customer customer=CustomerMapper.mapToCustomer(customerDto,new Customer())    ;
+        Customer customer=CustomerMapper.mapToCustomer(customerDto,new Customer()) ;
+        Optional<Customer> customerOptional =customerRepositiry.findByMobileNumber(customerDto.getMobileNumber());
+        if(customerOptional.isPresent()){
+            throw  new CustomerAlreadyExistsException("Customer already exists with mobile number"+customerDto.getMobileNumber());
+        }
+
         Customer savedCustomer= customerRepositiry.save(customer);
 
         Accounts newAccount=  createNewAccount(savedCustomer);

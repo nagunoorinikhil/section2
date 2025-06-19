@@ -1,0 +1,8 @@
+package com.nikhil.accounts.exception;
+
+public class CustomerAlreadyExistsException extends RuntimeException {
+
+    public CustomerAlreadyExistsException(String message) {
+        super(message);
+    }
+}

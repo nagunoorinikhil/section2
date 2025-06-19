@@ -12,6 +12,7 @@ import com.nikhil.accounts.service.IAccountsService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -30,10 +31,16 @@ public class AccountsServicesImpl implements IAccountsService {
      */
     @Override
     public void createAccount(CustomerDto customerDto) {
-        Customer customer=CustomerMapper.mapToCustomer(customerDto,new Customer())    ;
+        Customer customer=CustomerMapper.mapToCustomer(customerDto,new Customer()) ;
+        Optional<Customer> customerOptional =customerRepositiry.findByMobileNumber(customerDto.getMobileNumber());
+        if(customerOptional.isPresent()){
+            throw  new CustomerAlreadyExistsException("Customer already exists with mobile number"+customerDto.getMobileNumber());
+        }
+
         Customer savedCustomer= customerRepositiry.save(customer);
 
         Accounts newAccount=  createNewAccount(savedCustomer);
+        accountsRepositiry.save(newAccount);
 
 
     }
@@ -48,7 +55,7 @@ public class AccountsServicesImpl implements IAccountsService {
         newAccount.setCustomerId(customer.getCustomerId());
         long randomAccNumber = 1000000000L + new Random().nextInt(900000000);
 
-        newAccount.setAccountNumber(randomAccNumber);
+        newAccount.setAccountNumber(String.valueOf(randomAccNumber));
         newAccount.setAccountType(AccountsConstants.SAVINGS);
         newAccount.setBranchAddress(AccountsConstants.ADDRESS);
         return newAccount;

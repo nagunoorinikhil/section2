@@ -1,0 +1,6 @@
+package com.nikhil.accounts.exception;
+
+public class CustomerAlreadyExistsException {
+
+    
+}
