@@ -1,0 +1,14 @@
+package com.nikhil.accounts.repository;
+
+import com.nikhil.accounts.entity.Accounts;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+import java.util.OptionalInt;
+
+@Repository
+public interface AccountsRepositiry extends JpaRepository<Accounts, Long> {
+
+   Optional<Accounts> findbyCustomerId(Long customerId);
+}
