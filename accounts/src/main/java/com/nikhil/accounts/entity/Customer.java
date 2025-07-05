@@ -2,6 +2,8 @@ package com.nikhil.accounts.entity;
 
 
 import jakarta.persistence.*;
+import com.eazybytes.nikhil.entity.BaseEntity;
+
 import lombok.*;
 
 @Entity

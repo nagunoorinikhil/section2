@@ -1,0 +1,62 @@
+# -------------------------
+# Java build files
+# -------------------------
+target/
+*.class
+*.jar
+*.war
+*.ear
+
+# -------------------------
+# Maven Wrapper
+# -------------------------
+.mvn/
+!/.mvn/wrapper/maven-wrapper.jar
+mvnw
+mvnw.cmd
+
+# -------------------------
+# IntelliJ IDEA
+# -------------------------
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# -------------------------
+# Eclipse
+# -------------------------
+.project
+.classpath
+.settings/
+bin/
+
+# -------------------------
+# Logs
+# -------------------------
+*.log
+
+# -------------------------
+# OS Files
+# -------------------------
+.DS_Store
+Thumbs.db
+
+# -------------------------
+# Backup / Temp Files
+# -------------------------
+*~
+*.swp
+
+# -------------------------
+# Optional: Secrets
+# -------------------------
+# Uncomment only if you want to keep these local
+#src/main/resources/application.yml
+#src/main/resources/application.yml
+
+# -------------------------
+# Git keep for empty dirs
+# -------------------------
+!.gitkeep

@@ -1,7 +1,7 @@
 package com.nikhil.accounts.exception;
 
 
-import com.nikhil.accounts.dto.ErrorResponseDto;
+import com.eazybytes.nikhil.dto.ErrorResponseDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
